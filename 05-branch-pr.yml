@@ -1,0 +1,15 @@
+name: Develop Push & Main PR Trigger
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Triggered by develop push or PR to main"
