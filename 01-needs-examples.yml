@@ -1,0 +1,40 @@
+name: Needs Examples
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  example1:
+    name: Example 1 - Simple dependency
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Job 1 completed"
+
+  example2:
+    name: Example 2 - Runs after example1
+    needs: example1
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Job 2 runs only if Job 1 succeeds"
+
+  example3:
+    name: Example 3 - Independent job
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "This job runs independently"
+
+  example4:
+    name: Example 4 - Needs multiple jobs
+    needs: [example1, example3]
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Runs after example1 and example3"
+
+  example5:
+    name: Example 5 - Final job
+    needs: example4
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Final job after all dependencies"
